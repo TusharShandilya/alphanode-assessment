@@ -1,13 +1,13 @@
 import { RouteObject } from "react-router-dom";
 import LocationById from "./LocationById";
 import LocationEdit from "./LocationEdit";
-import Locations from "./Locations";
+import LocationLayout from "./LocationLayout";
 import LocationsWelcome from "./LocationsWelcome";
 
 // QUERY: Assuming locations page will be the home page (can be changed to "/locations")
 const locationRoutes: RouteObject = {
   path: "/",
-  element: <Locations />,
+  element: <LocationLayout />,
   children: [
     {
       index: true,

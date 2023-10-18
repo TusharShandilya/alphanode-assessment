@@ -1,6 +1,6 @@
 import { useQuery } from "@apollo/client";
 import config from "../../../../config";
-import { GET_LOCATIONS } from "../api/Queries";
+import { GET_LOCATIONS } from "../api/Location.queries";
 import { LocationListQuery } from "../../../../types/gql/graphql";
 import LocationCard from "./LocationCard";
 import { useNavigate } from "react-router-dom";
@@ -8,6 +8,8 @@ import Input from "../../../common/atoms/Input";
 import { useEffect, useState } from "react";
 import { LocationData } from "../../../../types";
 import Button from "../../../common/atoms/Button";
+import Error from "../../../common/molecules/Error";
+import Loading from "../../../common/molecules/Loading";
 
 type LocationFilters = {
   isActive?: boolean;
@@ -70,19 +72,15 @@ const LocationList = () => {
   };
 
   if (locations.loading) {
-    return <p>Loading...</p>;
+    return <Loading />;
   }
   if (locations.error) {
-    return (
-      <p className="text-red-800 font-bold">
-        <strong>Something has gone wrong</strong>
-      </p>
-    );
+    return <Error />;
   }
 
   return (
     <div>
-      <div className="mb-4">
+      <div className="mb-4 ">
         <Input
           placeholder="Search locations"
           value={search}
