@@ -3,14 +3,26 @@ import config from "../../../../config";
 import { GET_LOCATIONS } from "../api/Queries";
 import { LocationListQuery } from "../../../../types/gql/graphql";
 import LocationCard from "./LocationCard";
-import { LocationData } from "../../../../types";
+import { useNavigate } from "react-router-dom";
 
 const LocationList = () => {
+  const navigate = useNavigate();
+
   const locations = useQuery<LocationListQuery>(GET_LOCATIONS, {
     variables: {
       tenant: config.temp_vars.tenant,
     },
   });
+
+  const handleClick = (locId: string) => () => {
+    goToLocationId(locId);
+  };
+
+  const goToLocationId = (id: string) => {
+    navigate({
+      pathname: `/${id}`,
+    });
+  };
 
   if (locations.loading) {
     return <p>Loading...</p>;
@@ -27,8 +39,13 @@ const LocationList = () => {
 
   return (
     <div>
-      {data.map((location) => (
-        <LocationCard key={location?.id} location={location as LocationData} />
+      {data.filter(Boolean).map((location) => (
+        <div className="mb-2 last:mb-0" key={location!.id}>
+          <LocationCard
+            location={location}
+            onClick={handleClick(location!.id)}
+          />
+        </div>
       ))}
     </div>
   );

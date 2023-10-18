@@ -5,10 +5,12 @@ export const GET_LOCATIONS = gql`
     locationList(tenant: $tenant) {
       resources {
         address
+        name
         id
         status
+        updatedAt
+        type
         description
-        name
       }
     }
   }

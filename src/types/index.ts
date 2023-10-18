@@ -1,7 +1,6 @@
-export type LocationData = {
-  address?: string | null;
-  id: string;
-  status?: string | null;
-  description?: string | null;
-  name: string;
-};
+import { LocationQueryListResponse } from "./gql/graphql";
+import { Unpacked } from "./utils";
+
+export type LocationData = Unpacked<LocationQueryListResponse["resources"]>;
+
+export * from "./utils";

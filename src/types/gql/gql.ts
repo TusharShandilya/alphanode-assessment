@@ -13,7 +13,7 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
-    "\n  query LocationList($tenant: String!) {\n    locationList(tenant: $tenant) {\n      resources {\n        address\n        id\n        status\n        description\n        name\n      }\n    }\n  }\n": types.LocationListDocument,
+    "\n  query LocationList($tenant: String!) {\n    locationList(tenant: $tenant) {\n      resources {\n        address\n        name\n        id\n        status\n        updatedAt\n        type\n        description\n      }\n    }\n  }\n": types.LocationListDocument,
 };
 
 /**
@@ -33,7 +33,7 @@ export function graphql(source: string): unknown;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  query LocationList($tenant: String!) {\n    locationList(tenant: $tenant) {\n      resources {\n        address\n        id\n        status\n        description\n        name\n      }\n    }\n  }\n"): (typeof documents)["\n  query LocationList($tenant: String!) {\n    locationList(tenant: $tenant) {\n      resources {\n        address\n        id\n        status\n        description\n        name\n      }\n    }\n  }\n"];
+export function graphql(source: "\n  query LocationList($tenant: String!) {\n    locationList(tenant: $tenant) {\n      resources {\n        address\n        name\n        id\n        status\n        updatedAt\n        type\n        description\n      }\n    }\n  }\n"): (typeof documents)["\n  query LocationList($tenant: String!) {\n    locationList(tenant: $tenant) {\n      resources {\n        address\n        name\n        id\n        status\n        updatedAt\n        type\n        description\n      }\n    }\n  }\n"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};
