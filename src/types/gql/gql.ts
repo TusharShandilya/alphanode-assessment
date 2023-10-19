@@ -13,6 +13,8 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
+    "\n  mutation LocationCreate($requestBody: LocationWriteInput!, $tenant: String!) {\n    locationCreate(requestBody: $requestBody, tenant: $tenant) {\n      ... on Error {\n        error\n        message\n      }\n      ... on LocationCommandResponse {\n        resourceID\n      }\n    }\n  }\n": types.LocationCreateDocument,
+    "\n  mutation LocationUpdate(\n    $locationUpdateId: String!\n    $requestBody: LocationWriteInput!\n    $tenant: String!\n  ) {\n    locationUpdate(\n      id: $locationUpdateId\n      requestBody: $requestBody\n      tenant: $tenant\n    ) {\n      ... on LocationCommandResponse {\n        resourceID\n      }\n\n      ... on Error {\n        error\n        message\n      }\n    }\n  }\n": types.LocationUpdateDocument,
     "\n  query LocationList($tenant: String!) {\n    locationList(tenant: $tenant) {\n      resources {\n        address\n        name\n        id\n        status\n        updatedAt\n        type\n        description\n      }\n    }\n  }\n": types.LocationListDocument,
     "\n  query LocationRead($locationReadId: String!, $tenant: String!) {\n    locationRead(id: $locationReadId, tenant: $tenant) {\n      resource {\n        address\n        name\n        id\n        status\n        updatedAt\n        type\n        description\n      }\n    }\n  }\n": types.LocationReadDocument,
 };
@@ -31,6 +33,14 @@ const documents = {
  */
 export function graphql(source: string): unknown;
 
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  mutation LocationCreate($requestBody: LocationWriteInput!, $tenant: String!) {\n    locationCreate(requestBody: $requestBody, tenant: $tenant) {\n      ... on Error {\n        error\n        message\n      }\n      ... on LocationCommandResponse {\n        resourceID\n      }\n    }\n  }\n"): (typeof documents)["\n  mutation LocationCreate($requestBody: LocationWriteInput!, $tenant: String!) {\n    locationCreate(requestBody: $requestBody, tenant: $tenant) {\n      ... on Error {\n        error\n        message\n      }\n      ... on LocationCommandResponse {\n        resourceID\n      }\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  mutation LocationUpdate(\n    $locationUpdateId: String!\n    $requestBody: LocationWriteInput!\n    $tenant: String!\n  ) {\n    locationUpdate(\n      id: $locationUpdateId\n      requestBody: $requestBody\n      tenant: $tenant\n    ) {\n      ... on LocationCommandResponse {\n        resourceID\n      }\n\n      ... on Error {\n        error\n        message\n      }\n    }\n  }\n"): (typeof documents)["\n  mutation LocationUpdate(\n    $locationUpdateId: String!\n    $requestBody: LocationWriteInput!\n    $tenant: String!\n  ) {\n    locationUpdate(\n      id: $locationUpdateId\n      requestBody: $requestBody\n      tenant: $tenant\n    ) {\n      ... on LocationCommandResponse {\n        resourceID\n      }\n\n      ... on Error {\n        error\n        message\n      }\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
