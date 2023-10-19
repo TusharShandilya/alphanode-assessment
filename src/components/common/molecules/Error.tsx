@@ -1,8 +1,8 @@
 const Error = () => {
   return (
-    <p className="text-red-800 font-bold">
-      <strong>Something has gone wrong</strong>
-    </p>
+    <div className="text-center">
+      <p className="text-red-800 font-bold">Something has gone wrong</p>
+    </div>
   );
 };
 
