@@ -3,13 +3,13 @@ import config from "../../../../config";
 import { GET_LOCATIONS } from "../api/Location.queries";
 import { LocationListQuery } from "../../../../types/gql/graphql";
 import LocationCard from "./LocationCard";
-import { useNavigate } from "react-router-dom";
 import Input from "../../../common/atoms/Input";
 import { useEffect, useState } from "react";
 import { LocationData } from "../../../../types";
 import Button from "../../../common/atoms/Button";
 import Error from "../../../common/molecules/Error";
 import Loading from "../../../common/molecules/Loading";
+import useGoToLocation from "../../../../hooks/useGoToLocation";
 
 type LocationFilters = {
   isActive?: boolean;
@@ -17,7 +17,6 @@ type LocationFilters = {
 };
 
 const LocationList = () => {
-  const navigate = useNavigate();
   const locations = useQuery<LocationListQuery>(GET_LOCATIONS, {
     variables: {
       tenant: config.temp_vars.tenant,
@@ -29,8 +28,9 @@ const LocationList = () => {
     isActive: false,
     hasType: false,
   });
-
   const [filteredList, setFilteredList] = useState<LocationData[]>([]);
+
+  const goToLocationId = useGoToLocation();
 
   useEffect(() => {
     if (locations.data && locations.data.locationList) {
@@ -63,12 +63,6 @@ const LocationList = () => {
       ...prev,
       [name]: !prev[name],
     }));
-  };
-
-  const goToLocationId = (id: string) => {
-    navigate({
-      pathname: `/l/${id}`,
-    });
   };
 
   if (locations.loading) {
