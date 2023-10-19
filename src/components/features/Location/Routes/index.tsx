@@ -3,6 +3,7 @@ import LocationById from "./LocationById";
 import LocationEdit from "./LocationEdit";
 import LocationLayout from "./LocationLayout";
 import LocationsWelcome from "./LocationsWelcome";
+import LocationAdd from "./LocationAdd";
 
 // QUERY: Assuming locations page will be the home page (can be changed to "/locations")
 const locationRoutes: RouteObject = {
@@ -14,7 +15,11 @@ const locationRoutes: RouteObject = {
       element: <LocationsWelcome />,
     },
     {
-      path: ":locid",
+      path: "add",
+      element: <LocationAdd />,
+    },
+    {
+      path: "l/:locid",
       element: <LocationById />,
       children: [{ path: "edit", element: <LocationEdit /> }],
     },

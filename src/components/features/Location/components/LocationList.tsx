@@ -67,7 +67,7 @@ const LocationList = () => {
 
   const goToLocationId = (id: string) => {
     navigate({
-      pathname: `/${id}`,
+      pathname: `/l/${id}`,
     });
   };
 

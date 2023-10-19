@@ -1,4 +1,6 @@
+import { Link } from "react-router-dom";
 import MapImg from "../../../../assets/undraw_tourist_map.svg";
+import Button from "../../../common/atoms/Button";
 const LocationsWelcome = () => {
   return (
     <div className="mt-8 flex flex-col ">
@@ -11,6 +13,10 @@ const LocationsWelcome = () => {
       <h2 className="text-lg font-bold text-center text-gray-600">
         Please select a location to continue
       </h2>
+      <p className="text-md my-4 font-bold text-center text-gray-600">or</p>
+      <Link to="add" className="mx-auto">
+        <Button>Add a new location</Button>
+      </Link>
     </div>
   );
 };
