@@ -7,7 +7,7 @@ const useGoToLocation = () => {
   const goToLocation = useCallback(
     (locationId: string) => {
       navigate({
-        pathname: `l/${locationId}`,
+        pathname: `/l/${locationId}`,
       });
     },
     [navigate]

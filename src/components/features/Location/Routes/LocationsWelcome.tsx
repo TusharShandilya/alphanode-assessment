@@ -1,7 +1,9 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import MapImg from "../../../../assets/undraw_tourist_map.svg";
 import Button from "../../../common/atoms/Button";
+import { BackgroundState } from "../../../../types/application";
 const LocationsWelcome = () => {
+  const location = useLocation();
   return (
     <div className="mt-8 flex flex-col ">
       <div className="h-96 w-96 mx-auto my-6 ">
@@ -14,7 +16,11 @@ const LocationsWelcome = () => {
         Please select a location to continue
       </h2>
       <p className="text-md my-4 font-bold text-center text-gray-600">or</p>
-      <Link to="add" className="mx-auto">
+      <Link
+        to="add"
+        className="mx-auto"
+        state={{ backgroundLocation: location } as BackgroundState}
+      >
         <Button>Add a new location</Button>
       </Link>
     </div>

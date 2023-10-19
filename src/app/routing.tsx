@@ -1,4 +1,4 @@
-import { Navigate, useRoutes } from "react-router-dom";
+import { Navigate, useLocation, useRoutes } from "react-router-dom";
 import locationRoutes from "../components/features/Location/Routes";
 
 const Catch404Route = {
@@ -7,9 +7,22 @@ const Catch404Route = {
 };
 
 const Routing = () => {
-  const element = useRoutes([locationRoutes, Catch404Route]);
+  const location = useLocation();
+  const foregroundLocations = useRoutes(
+    [...locationRoutes.foreground, Catch404Route],
+    location.state?.backgroundLocation ?? location
+  );
 
-  return element;
+  const backgroundLocations = useRoutes([
+    ...(locationRoutes.background ? locationRoutes.background : []),
+  ]);
+
+  return (
+    <>
+      {foregroundLocations}
+      {backgroundLocations}
+    </>
+  );
 };
 
 export default Routing;
