@@ -22,10 +22,9 @@ const LocationEdit = () => {
     UPDATE_LOCATION,
     {
       refetchQueries: [GET_LOCATIONS, GET_LOCATION_BY_ID],
-      // update: (cache, { data: { locationUpdate } }) => {
-      //   // TODO: modify data in cache
-      //   // QUERY: not getting an updated response - I am assuming this is on purpose for now.
-      // },
+      // TODO: modify data in cache
+      // QUERY: not getting an updated response - I am assuming this is on purpose for now.
+      // QUERY: I am also assuming back-end deals with null responses and doesn't treat them like errors
     }
   );
 
