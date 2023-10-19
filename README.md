@@ -11,3 +11,13 @@
   - Search works only fetched functions and is not API based
 
 - I've stored tenant in the env - ideally would prefer to get this by httpOnly cookies or depending on use case save in state (either URL or react state)
+
+## .env
+
+These are the variables for .env (Same as the values I have received)
+
+```
+VITE_GQL_TOKEN=
+VITE_BASE_URL=
+VITE_TEMP_TENANT=
+```
