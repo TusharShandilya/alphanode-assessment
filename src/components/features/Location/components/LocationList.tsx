@@ -10,6 +10,7 @@ import Button from "../../../common/atoms/Button";
 import Error from "../../../common/molecules/Error";
 import Loading from "../../../common/molecules/Loading";
 import useGoToLocation from "../../../../hooks/useGoToLocation";
+import { Link, useLocation } from "react-router-dom";
 
 type LocationFilters = {
   isActive?: boolean;
@@ -17,6 +18,8 @@ type LocationFilters = {
 };
 
 const LocationList = () => {
+  const location = useLocation();
+
   const locations = useQuery<LocationListQuery>(GET_LOCATIONS, {
     variables: {
       tenant: config.temp_vars.tenant,
@@ -75,6 +78,18 @@ const LocationList = () => {
   return (
     <div>
       <div className="mb-4 ">
+        <div className="flex justify-end">
+          <Link
+            to="/add"
+            state={{
+              backgroundLocation: location,
+            }}
+          >
+            <Button className="mr-0" leadIcon="+ ">
+              New Location
+            </Button>
+          </Link>
+        </div>
         <Input
           placeholder="Search locations"
           value={search}
