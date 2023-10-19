@@ -1,9 +1,10 @@
 import { useMutation, useQuery } from "@apollo/client";
 import { Link, Outlet, useNavigate, useParams } from "react-router-dom";
-import { GET_LOCATION_BY_ID } from "../api/Location.queries";
+import { GET_LOCATIONS, GET_LOCATION_BY_ID } from "../api/Location.queries";
 import {
   LocationPatchMutation,
   LocationReadQuery,
+  LocationRemoveMutation,
 } from "../../../../types/gql/graphql";
 import config from "../../../../config";
 import Error from "../../../common/molecules/Error";
@@ -15,7 +16,7 @@ import LocationProperty from "../components/LocationProperty";
 import ButtonDropdown from "../../../common/molecules/ButtonDropdown";
 import { generateLocData } from "../utils/generateLocData";
 import { LocationPropertyData } from "../types";
-import { PATCH_LOCATION } from "../api/Location.mutation";
+import { DELETE_LOCATION, PATCH_LOCATION } from "../api/Location.mutation";
 
 const LocationById = () => {
   const { locid } = useParams();
@@ -42,6 +43,19 @@ const LocationById = () => {
       ],
     }
   );
+  const [httpDeleteLocation] = useMutation<LocationRemoveMutation>(
+    DELETE_LOCATION,
+    {
+      refetchQueries: [
+        {
+          query: GET_LOCATIONS,
+          variables: {
+            tenant: config.temp_vars.tenant,
+          },
+        },
+      ],
+    }
+  );
 
   const handleRefresh = async () => {
     try {
@@ -52,9 +66,20 @@ const LocationById = () => {
   };
 
   const handleDelete = async () => {
-    alert("implement this");
-
-    goToHome();
+    try {
+      await httpDeleteLocation({
+        variables: {
+          locationRemoveId: locid,
+          tenant: config.temp_vars.tenant,
+        },
+        update(cache) {
+          // TODO: remove this id from cache
+        },
+      });
+      goToHome();
+    } catch (error) {
+      alert("something has gone wrong");
+    }
   };
 
   const goToHome = () => {
@@ -148,6 +173,11 @@ const LocationById = () => {
           ))}
         </div>
       </div>
+
+      <div className="border-2 h-96 flex justify-center items-center rounded-md bg-gray-100">
+        MapBox Placeholder
+      </div>
+
       <Outlet />
     </div>
   );

@@ -38,20 +38,11 @@ export const UPDATE_LOCATION = gql`
 `;
 
 export const DELETE_LOCATION = gql`
-  mutation LocationUpdate(
-    $locationUpdateId: String!
-    $requestBody: LocationWriteInput!
-    $tenant: String!
-  ) {
-    locationUpdate(
-      id: $locationUpdateId
-      requestBody: $requestBody
-      tenant: $tenant
-    ) {
+  mutation LocationRemove($locationRemoveId: String!, $tenant: String!) {
+    locationRemove(id: $locationRemoveId, tenant: $tenant) {
       ... on LocationCommandResponse {
         resourceID
       }
-
       ... on Error {
         error
         message
